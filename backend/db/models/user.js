@@ -1,8 +1,5 @@
 'use strict';
-
-const { Validator } = require("sequelize");
-const bcrypt = require('bcryptjs');
-
+const { Validator } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -10,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [4, 30],
+        len: [3, 30],
         isNotEmail(value) {
           if (Validator.isEmail(value)) {
             throw new Error('Cannot be an email.');
@@ -20,14 +17,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-        len: [3, 256],
-        isEmail(value) {
-          if (Validator.isEmail(value) === false) {
-            throw new Error('Must be an email.');
-          }
-        },
+      allowNull: false,
+      validate: {
+        len: [3, 256]
       },
     },
     hashedPassword: {
@@ -53,18 +45,16 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
   });
-  User.associate = function(models) {
-    // associations can be defined here
-  };
-  User.prototype.toSafeObject = function() { // CAN'T be an arrow function
-    const { id, username, email } = this; // context will be User instance
+  User.prototype.toSafeObject = function() { // remember, this cannot be an arrow function
+    const { id, username, email } = this; // context will be the User instance
     return { id, username, email };
   };
   User.prototype.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.hashedPassword.toString());
-  };
-  User.getCurretUserById = async function (id) {
-    return await User.scope('currentUser').findByPk(id)
+   };
+  const bcrypt = require('bcryptjs');
+  User.getCurrentUserById = async function (id) {
+    return await User.scope('currentUser').findByPk(id);
   };
   User.login = async function ({ credential, password }) {
     const { Op } = require('sequelize');
@@ -88,6 +78,9 @@ module.exports = (sequelize, DataTypes) => {
       hashedPassword,
     });
     return await User.scope('currentUser').findByPk(user.id);
-  }
+  };
+  User.associate = function(models) {
+    // associations can be defined here
+  };
   return User;
 };
