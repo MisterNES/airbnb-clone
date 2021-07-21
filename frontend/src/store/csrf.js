@@ -24,3 +24,8 @@ export async function csrfFetch(url, options = {}) {
     //if under 400, return response
     return res;
 }
+
+// the follwoing should only be used in development
+export function restoreCSRF() {
+    return csrfFetch('/api/csrf/restore');
+}
