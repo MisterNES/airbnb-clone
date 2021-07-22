@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 const { setTokenCookie, restoreUser } = require("../../utils/auth");
 const { User } = require("../../db/models");
 const { check } = require('express-validator');
-const { handleValidationErrors, handleValidtionErrors } = require('../../utils/validation');
+const { handleValidationErrors } = require('../../utils/validation');
 
 const validateLogin = [
     check('credential')
@@ -14,7 +14,7 @@ const validateLogin = [
     check('password')
         .exists({ checkFalsy: true })
         .withMessage('Please provide a password.'),
-    handleValidtionErrors,
+        handleValidationErrors,
 ];
 
 const router = express.Router();
