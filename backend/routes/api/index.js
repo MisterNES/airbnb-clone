@@ -1,6 +1,7 @@
-const router = require('express').Router();
-const sessionRouter = require('./session.js')
-const usersRouter = require('./users.js');
+const express = require("express");
+const router = express.Router();
+const sessionRouter = require('./session')
+const usersRouter = require('./users');
 
 router.use('/session', sessionRouter);
 
@@ -38,10 +39,9 @@ router.get(
     }
 );
 
-router.post('/test', function(req, res){
+router.post('/test', function(req, res) {
     res.json({ requestBody: req.body });
 });
-
 
 
 module.exports = router;
