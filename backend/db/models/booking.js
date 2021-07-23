@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Booking.associate = function(models) {
-    // associations can be defined here
+    Booking.hasOne(User, { foreignKey: 'userId' });
+    Booking.hasOne(Place, { foreignKey: 'placeId'});
   };
   return Booking;
 };

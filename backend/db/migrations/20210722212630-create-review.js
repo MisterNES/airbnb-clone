@@ -11,11 +11,13 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: { model: 'Users', key: 'id'}
 
       },
       placeId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: { model: 'Places', key: 'id'}
       },
       rating: {
         type: Sequelize.INTEGER,

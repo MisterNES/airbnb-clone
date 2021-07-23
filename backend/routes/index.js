@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
 
+
+
 router.use('/api', apiRouter);
 
 // serves the react build files when in production
@@ -34,9 +36,9 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-router.get('/hello/world', function(req, res) {
-  res.cookie('XSRF-TOKEN', req.csrfToken());
-  res.send('Hello World!');
-});
+router.get('/', asyncHandler(async function(_req, res) {
+  const pokemon = await PokemonRepository.list();
+  return res.json(pokemon);
+}));
 
 module.exports = router;
