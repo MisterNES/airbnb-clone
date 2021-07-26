@@ -1,49 +1,39 @@
 const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
-const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
-
-
 
 router.use('/api', apiRouter);
 
-// serves the react build files when in production
+// Static routes
+// Serve React build files in production
 if (process.env.NODE_ENV === 'production') {
   const path = require('path');
-  //serves the frontends's index.html at the root
+  // Serve the frontend's index.html file at the root route
   router.get('/', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken());
-    return res.sendFile(
+    res.sendFile(
       path.resolve(__dirname, '../../frontend', 'build', 'index.html')
     );
   });
 
-
-
-  // router.get('/', asyncHandler(async function(_req, res) {
-//   const pokemon = await PokemonRepository.list();
-//   return res.json(pokemon);
-// }));
-
-  // serves static assets in frontend's build folder
+  // Serve the static assets in the frontend's build folder
   router.use(express.static(path.resolve("../frontend/build")));
 
+  // Serve the frontend's index.html file at all other routes NOT starting with /api
   router.get(/^(?!\/?api).*/, (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken());
-    return res.sendFile(
+    res.sendFile(
       path.resolve(__dirname, '../../frontend', 'build', 'index.html')
     );
   });
 }
 
-// adds a XSRF-TOKEN cookie if in dev
+// Add a XSRF-TOKEN cookie in development
 if (process.env.NODE_ENV !== 'production') {
   router.get('/api/csrf/restore', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken());
-    return res.json({});
+    res.status(201).json({});
   });
 }
-
-
 
 module.exports = router;

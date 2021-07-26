@@ -13,18 +13,23 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  return isLoaded && (
-    <Switch>
-      <Route exact path="/">
-        <PlaceBrowser/>
-      </Route>
-      <Route path="/login">
-        <LoginFormPage />
-      </Route>
-      <Route path="/signup">
-        <SignUpFormPage />
-      </Route>
-    </Switch>
+  return (
+    isLoaded && (
+      <>
+        <h1>Welcome to Airvenue!</h1>
+        <Switch>
+          <Route exact path="/">
+            <PlaceBrowser />
+          </Route>
+          <Route path="/login">
+            <LoginFormPage />
+          </Route>
+          <Route path="/signup">
+            <SignUpFormPage />
+          </Route>
+        </Switch>
+      </>
+    )
   );
 }
 
