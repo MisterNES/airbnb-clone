@@ -4,10 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     placeId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: {model: 'Place'}
     },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: { model: 'User' }
     },
     startDate: {
       type: DataTypes.DATE,
@@ -19,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Booking.associate = function(models) {
-    Booking.hasOne(User, { foreignKey: 'userId' });
-    Booking.hasOne(Place, { foreignKey: 'placeId'});
+    // Booking.hasOne('User', { foreignKey: 'userId' });
+    // Booking.hasOne('Place', { foreignKey: 'placeId'});
   };
   return Booking;
 };

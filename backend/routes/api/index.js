@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const sessionRouter = require('./session')
 const usersRouter = require('./users');
+const placeRouter = require("./place.js");
+
+router.use("/place", placeRouter);
 
 router.use('/session', sessionRouter);
 

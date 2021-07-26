@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
+const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 
 
 
@@ -16,6 +17,13 @@ if (process.env.NODE_ENV === 'production') {
       path.resolve(__dirname, '../../frontend', 'build', 'index.html')
     );
   });
+
+
+
+  // router.get('/', asyncHandler(async function(_req, res) {
+//   const pokemon = await PokemonRepository.list();
+//   return res.json(pokemon);
+// }));
 
   // serves static assets in frontend's build folder
   router.use(express.static(path.resolve("../frontend/build")));
@@ -36,9 +44,6 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-router.get('/', asyncHandler(async function(_req, res) {
-  const pokemon = await PokemonRepository.list();
-  return res.json(pokemon);
-}));
+
 
 module.exports = router;

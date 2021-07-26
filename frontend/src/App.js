@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import LoginFormPage from "./components/LoginFormPage";
-import SignupFormPage from "./components/SignupFormPage";
+import SignUpFormPage from "./components/SignUpFormPage";
 import * as sessionActions from "./store/session";
+import PlaceBrowser from "./components/PlaceBrowser";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,11 +15,14 @@ function App() {
 
   return isLoaded && (
     <Switch>
+      <Route exact path="/">
+        <PlaceBrowser/>
+      </Route>
       <Route path="/login">
         <LoginFormPage />
       </Route>
       <Route path="/signup">
-        <SignupFormPage />
+        <SignUpFormPage />
       </Route>
     </Switch>
   );

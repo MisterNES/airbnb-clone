@@ -18,8 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     comment: DataTypes.TEXT
   }, {});
   Review.associate = function(models) {
-    Review.hasOne('Place', { foreignKey: 'placeId' });
-    Review.hasOne('User', { foreignKey: 'userId'})
+    // Review.hasOne('Place', { foreignKey: 'placeId' });
+    // Review.hasOne('User', { foreignKey: 'userId'})
   };
   return Review;
 };

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [5, 50]
+        len: [5, 150]
       }
     },
     imageUrl: {
@@ -31,8 +31,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   Place.associate = function(models) {
-    Place.hasMany('Booking', { foreignKey: 'placeId'})
-    Place.hasMany('Review', { foreignKey: 'placeId'})
+    // Place.hasMany('Booking', { foreignKey: 'placeId'})
+    // Place.hasMany('Review', { foreignKey: 'placeId'})
   };
   return Place;
 };
