@@ -6,10 +6,8 @@ import { getPlace } from "../../store/places";
 const PlaceBrowser = () => {
   const { placeId } = useParams();
   const place = useSelector(state => {
-
     return state.place.list.map(placeId => state.place[placeId]);
   });
-  console.log(place);
   const dispatch = useDispatch();
 
   useEffect(() => {
