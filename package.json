@@ -1,7 +1,6 @@
 {
   "name": "root",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "heroku-postbuild": "npm run build --prefix frontend",
     "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
