@@ -10,6 +10,20 @@ module.exports = (sequelize, DataTypes) => {
         len: [5, 150]
       }
     },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [3, 20]
+      }
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [3, 20]
+      }
+    },
     imageUrl: {
       type: DataTypes.STRING,
       allowNull: false,

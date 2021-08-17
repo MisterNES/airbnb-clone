@@ -12,6 +12,14 @@ module.exports = {
         type: Sequelize.STRING(150),
         allowNull: false
       },
+      city: {
+        type: Sequelize.STRING(20),
+        allowNull: false
+      },
+      state: {
+        type: Sequelize.STRING(20),
+        allowNull: false
+      },
       imageUrl: {
         type: Sequelize.STRING(255),
         allowNull: false,
@@ -19,7 +27,7 @@ module.exports = {
       },
       description: {
         type: Sequelize.STRING(3000),
-        allowNull: true
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
