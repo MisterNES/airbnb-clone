@@ -11,7 +11,7 @@ router.get('/', asyncHandler(async function(req, res) {
 }));
 
 router.get('/:id', asyncHandler(async function(req, res) {
-    const place = await Place(req.params.id);
+    const place = await db.Place.findByPk(req.params.id);
     return res.json(place);
   }));
 
