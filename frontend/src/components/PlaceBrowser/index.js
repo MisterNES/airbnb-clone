@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink, Route, useParams } from "react-router-dom";
-import { getPlace } from "../../store/places";
+import { getPlaces } from "../../store/places";
 
 const PlaceBrowser = () => {
-  const { placeId } = useParams();
+  // const { placeId } = useParams();
   const place = useSelector(state => {
-    return state.place.list.map(placeId => state.place[placeId]);
+    return state.places.list.map(placeId => state.places[placeId]);
   });
+  console.log(place)
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPlace());
+    dispatch(getPlaces());
   }, [dispatch]);
 
   if (!place) {
@@ -24,7 +25,7 @@ const PlaceBrowser = () => {
         {place.map((place) => {
             return (
           <div className="place-entry">
-          <NavLink to={`/${place.id}`} >
+          <NavLink to={`/places/${place.id}`} >
             <div
               className="place-img"
             >

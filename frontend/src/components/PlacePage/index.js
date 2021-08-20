@@ -4,24 +4,36 @@ import { NavLink, Route, useParams } from "react-router-dom";
 import { getPlace } from "../../store/places";
 
 const PlacePage = () => {
+    const dispatch = useDispatch();
     const { placeId } = useParams();
-    const currrentPlace = place[placeId];
+    console.log(placeId);
+    const currentPlace = useSelector(state =>
+        state.places[placeId]);
 
     useEffect(() => {
-        dispatch(getPlace(place));
-      }, [dispatch]);
+        dispatch(getPlace());
+    }, [dispatch]);
+
+    if(!currentPlace){
+        return null;
+    }
 
     return(
         <div>
-            <div>
-                <img alt='location' src={currrentPlace.id} />
+            {currentPlace && (<><div>
+                <img alt='location' src={`${currentPlace?.imageUrl}`} />
             </div>
             <div>
-                {currrentPlace.title}
+                {currentPlace?.title}
             </div>
             <div>
-                {place.description}
+                {currentPlace?.description}
             </div>
+            </>)}
+            
+
         </div>
     )
 }
+
+export default PlacePage;

@@ -1,18 +1,33 @@
-const LOAD = "place/LOAD";
+const LOAD_ALL = "place/LOAD_ALL";
+const LOAD_ONE = "place/LOAD_ONE"
 
-const load = (list) => ({
-  type: LOAD,
-  list,
+const loadAll = (list) => ({
+  type: LOAD_ALL,
+  list
 });
 
-export const getPlace = () => async (dispatch) => {
+const loadOne = (place) => ({
+  type: LOAD_ONE,
+  place,
+})
+
+export const getPlaces = () => async (dispatch) => {
   const res = await fetch(`/api/place`);
 
   if (res.ok) {
     const list = await res.json();
-    dispatch(load(list));
+    dispatch(loadAll(list));
   }
 };
+
+export const getPlace = () => async(dispatch) => {
+  const res = await fetch(`/api/place/:id`);
+
+  if (res.ok) {
+    const place = await res.json();
+    dispatch(loadOne(place))
+  }
+}
 
 const initialState = {
   list: [],
@@ -27,7 +42,7 @@ const sortList = (list) => {
 
 const placeReducer = (state = initialState, action) => {
     switch (action.type) {
-      case LOAD: {
+      case LOAD_ALL: {
         const allPlaces = {};
         action.list.forEach(place => {
           allPlaces[place.id] = place;
@@ -37,6 +52,11 @@ const placeReducer = (state = initialState, action) => {
           ...state,
           list: sortList(action.list),
         };
+      }
+      case LOAD_ONE: {
+        const singlePlace = {};
+        singlePlace[action.place.id] = action.place;
+        return singlePlace;
       }
       default:
       return state;
