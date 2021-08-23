@@ -6,6 +6,7 @@ import SignUpFormPage from "./components/SignUpFormPage";
 import * as sessionActions from "./store/session";
 import PlaceBrowser from "./components/PlaceBrowser";
 import PlacePage from "./components/PlacePage";
+import CommentForm from "./components/CommentForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function App() {
           </Route>
           <Route exact path="/places/:placeId">
             <PlacePage />
+            <CommentForm />
           </Route>
         </Switch>
       </>

@@ -12,7 +12,7 @@ const loadOne = (place) => ({
 })
 
 export const getPlaces = () => async (dispatch) => {
-  const res = await fetch(`/api/place`);
+  const res = await fetch(`/api/places`);
 
   if (res.ok) {
     const list = await res.json();
@@ -20,14 +20,14 @@ export const getPlaces = () => async (dispatch) => {
   }
 };
 
-export const getPlace = () => async(dispatch) => {
-  const res = await fetch(`/api/place/:id`);
+// export const getPlace = () => async(dispatch) => {
+//   const res = await fetch(`/api/places/:placeId`);
 
-  if (res.ok) {
-    const place = await res.json();
-    dispatch(loadOne(place))
-  }
-}
+//   if (res.ok) {
+//     const place = await res.json();
+//     dispatch(loadOne(place))
+//   }
+// }
 
 const initialState = {
   list: [],

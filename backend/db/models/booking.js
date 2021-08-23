@@ -4,12 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     placeId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {model: 'Place'}
     },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: 'User' }
     },
     startDate: {
       type: DataTypes.DATE,

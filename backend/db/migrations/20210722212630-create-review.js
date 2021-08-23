@@ -21,10 +21,11 @@ module.exports = {
       },
       rating: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       comment: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
