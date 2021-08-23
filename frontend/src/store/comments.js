@@ -12,13 +12,13 @@ const loadComments = (comments) => ({
 });
 
 export const fetchComments = () => async(dispatch) => {
-    const res = await fetch('/api/place/:placeId/comments');
+    const res = await fetch('/api/places/:id');
     const comments = await res.json();
     dispatch(loadComments(comments));
 };
 
 export const postComment = (payload) => async(dispatch) => {
-    const res = await fetch('/api/place/:id', {
+    const res = await fetch('/api/places/:id', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
